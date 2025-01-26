@@ -30,18 +30,9 @@ const SERVER_URL = process.env.NEXT_PUBLIC_SERVER_URL;
 
 export function WasteTrends({ item, date }) {
     const [items, setItems] = useState(null);
-    let chartData = [
-        { month: "January", counts: 5 },
-        { month: "February", counts: 4 },
-        { month: "March", counts: 3 },
-        { month: "April", counts: 2 },
-        { month: "May", counts: 2 },
-        { month: "June", counts: 2 },
-    ];
-
     const completeDates = [];
 
-    if (items) {
+    if (items && date && date.to && date.from) {
         const chartMap = new Map();
         items.forEach(item => {
             const key = `${item.month}/${item.day}/${item.year}`;
