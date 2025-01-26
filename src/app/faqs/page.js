@@ -70,7 +70,7 @@ const FAQs = () => {
             </section>
             <Separator className="my-4" />
             <section className="mt-6">
-                <HeaderTitle to="issues" className="text-xl sm:text-2xl"> Tehnical issues </HeaderTitle>
+                <HeaderTitle to="issues" className="text-xl sm:text-2xl"> Technical issues </HeaderTitle>
                 <h1 className="text-xl sm:text-2xl font-semibold mt-6"> Camera cannot detect trash </h1>
                 <p className="mt-4"> 
                     <strong> Solution: </strong> 

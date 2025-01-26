@@ -1,17 +1,17 @@
 'use client'
 
-import * as React from "react"
+import { useState } from "react";
 
 import { addDays, subDays } from "date-fns"
 
-import { CalendarRange } from "@/components/cards/calendar-range";
+import { ChartSettings } from "@/components/cards/chart-settings";
 import TotalCounts from "@/components/cards/charts/total-counts";
 import { WasteTrends } from "@/components/cards/charts/waste-trends";
 import HeaderTitle from "@/components/header-title";
 import AboutDashboard from "@/components/cards/about-dashboard";
 
 const Dashboard = () => {
-    const [date, setDate] = React.useState({
+    const [date, setDate] = useState({
         from: subDays(new Date(), 3),
         to: addDays(new Date(), 3),
     });
@@ -57,7 +57,7 @@ const Dashboard = () => {
             <section className="my-6 w-full lg:h-[1200px] lg:flex gap-2">
                 <div className="flex flex-col gap-2 lg:max-w-[200px] xl:max-w-[400px]">
                     <AboutDashboard />
-                    <CalendarRange date={date} setDate={setDate} />
+                    <ChartSettings date={date} setDate={setDate} />
                     <TotalCounts date={date} />
                 </div>
                 <div className="grid grid-rows-2 gap-2 flex-1 mt-2 lg:mt-0">

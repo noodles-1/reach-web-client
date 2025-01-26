@@ -1,5 +1,7 @@
 'use client'
 
+import { useState, useEffect } from "react";
+
 import {
     Card,
     CardContent,
@@ -17,11 +19,6 @@ import {
 
 import { format } from "date-fns";
 
-const chartData = [
-    { item: "bottles", counts: 275, fill: "var(--color-bottles)" },
-    { item: "utensils", counts: 200, fill: "var(--color-utensils)" },
-];
-
 const chartConfig = {
     counts: {
       label: "Counts",
@@ -36,11 +33,45 @@ const chartConfig = {
     }
 };
 
+const SERVER_URL = process.env.NEXT_PUBLIC_SERVER_URL;
+
 const TotalCounts = ({ date }) => {
+    const [items, setItems] = useState(null);
+    const chartData = [
+        { item: "bottles", counts: items?.filter(item => item.name === 'bottle').length, fill: "var(--color-bottles)" },
+        { item: "utensils", counts: items?.filter(item => item.name === 'utensil').length, fill: "var(--color-utensils)" },
+    ];
+
+    useEffect(() => {
+        let interval;
+        
+        const fetchData = async () => {
+            if (date && date.from && date.to) {
+                const dateFrom = format(date.from, 'yyyy-MM-dd');
+                const dateTo = format(date.to, 'yyyy-MM-dd');
+                const response = await fetch(`${SERVER_URL}/item?dateFrom=${dateFrom}&dateTo=${dateTo}`);
+                const data = await response.json();
+                if (data.length)
+                    setItems(data);
+                else
+                    setItems(null);
+            }
+            else
+                setItems(null);
+        };
+        
+        fetchData();
+        interval = setInterval(fetchData, 5000);
+
+        return () => {
+            clearInterval(interval);
+        };
+    }, [date]);
+
     return (
         <Card className="flex-1">
             <CardHeader>
-                <CardTitle className="text-xl sm:text-2xl"> Waste Composition </CardTitle>
+                <CardTitle className="text-xl sm:text-2xl"> Waste composition </CardTitle>
                 <CardDescription>
                     Total waste items (
                         {date?.from ? (
@@ -59,54 +90,60 @@ const TotalCounts = ({ date }) => {
                 </CardDescription>
             </CardHeader>
             <CardContent>
-                <ChartContainer
-                    config={chartConfig}
-                    className="mx-auto aspect-square"
-                >
-                    <PieChart>
-                        <ChartTooltip
-                            cursor={false}
-                            content={<ChartTooltipContent hideLabel />}
-                        />
-                        <Pie
-                            data={chartData}
-                            dataKey="counts"
-                            nameKey="item"
-                            innerRadius={65}
-                            strokeWidth={5}
+                {
+                    items ? (
+                        <ChartContainer
+                            config={chartConfig}
+                            className="mx-auto aspect-square"
                         >
-                            <Label
-                                content={({ viewBox }) => {
-                                    if (viewBox && "cx" in viewBox && "cy" in viewBox) {
-                                        return (
-                                            <text
-                                                x={viewBox.cx}
-                                                y={viewBox.cy}
-                                                textAnchor="middle"
-                                                dominantBaseline="middle"
-                                            >
-                                                <tspan
-                                                    x={viewBox.cx}
-                                                    y={viewBox.cy}
-                                                    className="fill-foreground text-3xl font-bold"
-                                                >
-                                                    69
-                                                </tspan>
-                                                <tspan
-                                                    x={viewBox.cx}
-                                                    y={(viewBox.cy || 0) + 24}
-                                                    className="fill-muted-foreground"
-                                                >
-                                                    Total counts
-                                                </tspan>
-                                            </text>
-                                        )
-                                    }
-                                }}
-                            />
-                        </Pie>
-                    </PieChart>
-                </ChartContainer>
+                            <PieChart>
+                                <ChartTooltip
+                                    cursor={false}
+                                    content={<ChartTooltipContent hideLabel />}
+                                />
+                                <Pie
+                                    data={chartData}
+                                    dataKey="counts"
+                                    nameKey="item"
+                                    innerRadius={65}
+                                    strokeWidth={5}
+                                >
+                                    <Label
+                                        content={({ viewBox }) => {
+                                            if (viewBox && "cx" in viewBox && "cy" in viewBox) {
+                                                return (
+                                                    <text
+                                                        x={viewBox.cx}
+                                                        y={viewBox.cy}
+                                                        textAnchor="middle"
+                                                        dominantBaseline="middle"
+                                                    >
+                                                        <tspan
+                                                            x={viewBox.cx}
+                                                            y={viewBox.cy}
+                                                            className="fill-foreground text-3xl font-bold"
+                                                        >
+                                                            {items?.length ?? 0}
+                                                        </tspan>
+                                                        <tspan
+                                                            x={viewBox.cx}
+                                                            y={(viewBox.cy || 0) + 24}
+                                                            className="fill-muted-foreground"
+                                                        >
+                                                            Total waste
+                                                        </tspan>
+                                                    </text>
+                                                )
+                                            }
+                                        }}
+                                    />
+                                </Pie>
+                            </PieChart>
+                        </ChartContainer>
+                    ) : (
+                        <h1> No data. </h1>
+                    )
+                }
             </CardContent>
         </Card>
     );

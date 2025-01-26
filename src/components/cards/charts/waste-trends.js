@@ -1,5 +1,7 @@
 'use client'
 
+import { useState, useEffect } from "react";
+
 import {
     Card,
     CardContent,
@@ -15,30 +17,82 @@ import {
     ChartTooltipContent,
 } from "@/components/ui/chart";
 
-import { format } from "date-fns";
-
-const chartData = [
-    { month: "January", desktop: 186 },
-    { month: "February", desktop: 305 },
-    { month: "March", desktop: 237 },
-    { month: "April", desktop: 73 },
-    { month: "May", desktop: 209 },
-    { month: "June", desktop: 214 },
-];
+import { addDays, format } from "date-fns";
 
 const chartConfig = {
-    desktop: {
-        label: "Desktop",
+    counts: {
+        label: "Counts",
         color: "var(--chart-1)",
     },
 };
 
+const SERVER_URL = process.env.NEXT_PUBLIC_SERVER_URL;
+
 export function WasteTrends({ item, date }) {
+    const [items, setItems] = useState(null);
+    let chartData = [
+        { month: "January", counts: 5 },
+        { month: "February", counts: 4 },
+        { month: "March", counts: 3 },
+        { month: "April", counts: 2 },
+        { month: "May", counts: 2 },
+        { month: "June", counts: 2 },
+    ];
+
+    const completeDates = [];
+
+    if (items) {
+        const chartMap = new Map();
+        items.forEach(item => {
+            const key = `${item.month}/${item.day}/${item.year}`;
+            chartMap.set(key, item.item_count);
+        });
+
+        let currDate = new Date(date.from);
+        const endDate = new Date(date.to);
+
+        while (currDate <= endDate) {
+            const monthDate = `${currDate.getMonth() + 1}/${currDate.getDate()}`
+            const key = `${monthDate}/${currDate.getFullYear()}`;
+            if (chartMap.has(key))
+                completeDates.push({ date: monthDate, counts: chartMap.get(key) });
+            else
+                completeDates.push({ date: monthDate, counts: 0 });
+            currDate = addDays(currDate, 1);
+        }
+    }
+
+    useEffect(() => {
+        let interval;
+
+        const fetchData = async () => {
+            if (date && date.from && date.to) {
+                const dateFrom = format(date.from, 'yyyy-MM-dd');
+                const dateTo = format(date.to, 'yyyy-MM-dd');
+                const response = await fetch(`${SERVER_URL}/item/${item}?dateFrom=${dateFrom}&dateTo=${dateTo}`);
+                const data = await response.json();
+                if (data.length)
+                    setItems(data);
+                else
+                    setItems(null);
+            }
+            else
+                setItems(null);
+        };
+
+        fetchData();
+        interval = setInterval(fetchData, 5000);
+
+        return () => {
+            clearInterval(interval);
+        };
+    }, [date]);
+
     return (
         <Card>
             <CardHeader>
-                <CardTitle className="text-xl sm:text-2xl"> Waste Trend ({item}) </CardTitle>
-                <CardDescription> 
+                <CardTitle className="text-xl sm:text-2xl"> Waste trend ({item}) </CardTitle>
+                <CardDescription>
                     {date?.from ? (
                         date.to ? (
                             <>
@@ -54,38 +108,44 @@ export function WasteTrends({ item, date }) {
                 </CardDescription>
             </CardHeader>
             <CardContent>
-                <ChartContainer 
-                    config={chartConfig}
-                >
-                    <LineChart
-                        accessibilityLayer
-                        data={chartData}
-                        margin={{
-                            left: 12,
-                            right: 12,
-                        }}
-                    >
-                    <CartesianGrid vertical={false} />
-                    <XAxis
-                        dataKey="month"
-                        tickLine={false}
-                        axisLine={false}
-                        tickMargin={8}
-                        tickFormatter={(value) => value.slice(0, 3)}
-                    />
-                    <ChartTooltip
-                        cursor={false}
-                        content={<ChartTooltipContent hideLabel />}
-                    />
-                    <Line
-                        dataKey="desktop"
-                        type="linear"
-                        stroke="var(--color-desktop)"
-                        strokeWidth={2}
-                        dot={false}
-                    />
-                    </LineChart>
-                </ChartContainer>
+                {
+                    items ? (
+                        <ChartContainer
+                            config={chartConfig}
+                        >
+                            <LineChart
+                                accessibilityLayer
+                                data={completeDates}
+                                margin={{
+                                    left: 12,
+                                    right: 12,
+                                }}
+                            >
+                                <CartesianGrid vertical={false} />
+                                <XAxis
+                                    dataKey="date"
+                                    tickLine={false}
+                                    axisLine={false}
+                                    tickMargin={10}
+                                    interval={completeDates.length > 10 ? Math.floor(completeDates.length / 10) : 0}
+                                />
+                                <ChartTooltip
+                                    cursor={false}
+                                    content={<ChartTooltipContent />}
+                                />
+                                <Line
+                                    dataKey="counts"
+                                    type="linear"
+                                    stroke="var(--color-counts)"
+                                    strokeWidth={2}
+                                    dot={false}
+                                />
+                            </LineChart>
+                        </ChartContainer>
+                    ) : (
+                        <h1> No data. </h1>
+                    )
+                }
             </CardContent>
         </Card>
     )
