@@ -23,12 +23,12 @@ export default function RootLayout({ children }) {
     return (
         <html lang="en">
             <body
-                className={`${geistSans.variable} ${geistMono.variable} antialiased font-[family-name:var(--font-geist-sans)]`}
+                className={`${geistSans.variable} ${geistMono.variable} antialiased font-[family-name:var(--font-geist-sans)] p-4 sm:p-16`}
             >
                 <SidebarProvider>
                     <AppSidebar />
-                    <main>
-                        <SidebarTrigger />
+                    <main className="w-full md:w-[70%]">
+                        <SidebarTrigger className="md:hidden py-6" />
                         {children}
                     </main>
                 </SidebarProvider>
