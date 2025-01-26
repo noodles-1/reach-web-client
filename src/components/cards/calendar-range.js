@@ -25,7 +25,7 @@ export function CalendarRange({ className, date, setDate }) {
     return (
         <Card>
             <CardHeader>
-                <CardTitle> Chart settings </CardTitle>
+                <CardTitle className="text-xl sm:text-2xl"> Chart settings </CardTitle>
                 <CardDescription> Pick a date range to show data existing within the range </CardDescription>
             </CardHeader>
             <CardContent>

@@ -40,7 +40,7 @@ const TotalCounts = ({ date }) => {
     return (
         <Card className="flex-1">
             <CardHeader>
-                <CardTitle> Waste Composition </CardTitle>
+                <CardTitle className="text-xl sm:text-2xl"> Waste Composition </CardTitle>
                 <CardDescription>
                     Total waste items (
                         {date?.from ? (

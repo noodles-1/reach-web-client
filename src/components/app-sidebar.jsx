@@ -48,8 +48,8 @@ export function AppSidebar() {
         <Sidebar>
             <SidebarContent>
                 <SidebarGroup>
-                    <SidebarHeader className="font-semibold"> ASTCAW - Waste Management </SidebarHeader>
-                    <Separator className="my-4"/>
+                    <SidebarHeader className="font-semibold my-8 sm:my-4"> ASTCAW - Waste Management </SidebarHeader>
+                    <Separator className="mb-4"/>
                     <SidebarGroupContent>
                         <SidebarMenu>
                         {items.map((item) => (

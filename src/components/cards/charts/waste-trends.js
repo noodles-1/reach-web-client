@@ -37,7 +37,7 @@ export function WasteTrends({ item, date }) {
     return (
         <Card>
             <CardHeader>
-                <CardTitle> Waste Trend ({item}) </CardTitle>
+                <CardTitle className="text-xl sm:text-2xl"> Waste Trend ({item}) </CardTitle>
                 <CardDescription> 
                     {date?.from ? (
                         date.to ? (
