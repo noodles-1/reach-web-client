@@ -8,6 +8,7 @@ import {
     CardDescription,
     CardHeader,
     CardTitle,
+    CardFooter,
 } from "@/components/ui/card";
 
 import { Label, Pie, PieChart } from "recharts";
@@ -16,6 +17,8 @@ import {
     ChartTooltip,
     ChartTooltipContent,
 } from "@/components/ui/chart";
+
+import { TrendingUp } from "lucide-react";
 
 import { format } from "date-fns";
 
@@ -145,6 +148,21 @@ const TotalCounts = ({ date }) => {
                     )
                 }
             </CardContent>
+            <CardFooter className="flex flex-col text-sm gap-2">
+                {items &&
+                    <>
+                        {chartData[0].counts > 0 &&
+                            <div className="font-semibold flex justify-center w-full items-center gap-2"> 
+                                Raised a total of ₱{(chartData[0].counts * 0.32).toFixed(2)} for {chartData[0].counts} {`${chartData[0].counts === 1 ? 'bottle' : 'bottles'}`}
+                                <TrendingUp className="h-4 w-4" />
+                            </div>
+                        }
+                        {chartData[1].counts > 0 &&
+                            <h1 className="text-muted-foreground"> Utensils accumulated will be upcycled </h1>
+                        }
+                    </>
+                }
+            </CardFooter>
         </Card>
     );
 }
