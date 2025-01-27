@@ -4,6 +4,8 @@ import "@/app/globals.css";
 import { SidebarProvider, SidebarTrigger } from "@/components/ui/sidebar";
 import { AppSidebar } from "@/components/app-sidebar";
 
+import { Analytics } from "@vercel/analytics";
+
 const geistSans = Geist({
     variable: "--font-geist-sans",
     subsets: ["latin"],
@@ -32,6 +34,7 @@ export default function RootLayout({ children }) {
                         {children}
                     </main>
                 </SidebarProvider>
+                <Analytics />
             </body>
         </html>
     );
