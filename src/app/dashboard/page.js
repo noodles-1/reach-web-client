@@ -18,14 +18,14 @@ const Dashboard = () => {
 
     return (
         <>
-            <h1 className="text-2xl sm:text-3xl font-semibold"> R.E.A.C.H Waste Management Dashboard </h1>
+            <h1 className="text-2xl sm:text-3xl font-semibold"> BOUTEN-E Waste Management Dashboard </h1>
             <h1 className="text-xl sm:text-2xl mt-6"> Enhancing Waste Management Practices at Arellano University - Jose Rizal Campus </h1>
             <section className="mt-6">
                 <HeaderTitle to="introduction" className="text-xl sm:text-2xl font-semibold">
-                    Introduction to the R.E.A.C.H Waste Management Dashboard
+                    Introduction to the BOUTEN-E Waste Management Dashboard
                 </HeaderTitle>
                 <p className="mt-4">
-                    Welcome to the R.E.A.C.H Waste Management Dashboard! This platform is designed to enhance waste management practices at {' '}
+                    Welcome to the BOUTEN-E Waste Management Dashboard! This platform is designed to enhance waste management practices at {' '}
                     <span className="font-semibold">
                         Arellano University - Jose Rizal Campus.
                     </span>
@@ -33,7 +33,7 @@ const Dashboard = () => {
             </section>
             <section className="mt-6">
                 <HeaderTitle to="goals" className="text-xl sm:text-2xl font-semibold"> 
-                    Goals of the R.E.A.C.H Project
+                    Goals of the BOUTEN-E Project
                 </HeaderTitle>
                 <ol className="list-inside list-disc mt-4">
                     <li className="mb-4"> 
