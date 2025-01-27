@@ -33,7 +33,7 @@ const Dashboard = () => {
             </section>
             <section className="mt-6">
                 <HeaderTitle to="goals" className="text-xl sm:text-2xl font-semibold"> 
-                    Goals of the BOUTEN-E Project
+                    Goals of the BOUTEN-E Project 
                 </HeaderTitle>
                 <ol className="list-inside list-disc mt-4">
                     <li className="mb-4"> 
