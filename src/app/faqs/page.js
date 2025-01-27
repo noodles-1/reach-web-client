@@ -6,86 +6,66 @@ const FAQs = () => {
         <div>
             <h1 className="text-2xl sm:text-3xl font-semibold"> Dashboard User Guide and FAQs </h1>
             <section className="mt-6">
-                <HeaderTitle to="guide" className="text-xl sm:text-2xl"> Step-by-step guide on how to use the dashboard: </HeaderTitle>
+                <HeaderTitle to="guide" className="text-xl sm:text-2xl"> Step-by-step: How to use the dashboard </HeaderTitle>
                 <ol className="list-inside list-decimal mt-6">
                     <li className="mb-6"> 
-                        <span className="font-semibold text-xl sm:text-2xl"> Open the web browser </span>
+                        <span className="font-semibold text-xl sm:text-2xl"> Scan your waste </span>
                         <p className="mt-2"> 
-                            Launch your preferred web browser and enter the website URL into the address bar. Press Enter to access the website.
+                            Place your trash—whether a bottle or utensil—under the camera. Once scanned, the system will automatically log the item, and it will be counted on the website.
                         </p>
                     </li>
                     <li className="mb-6"> 
-                        <span className="font-semibold text-xl sm:text-2xl"> Access the dashboard </span>
+                        <span className="font-semibold text-xl sm:text-2xl"> Monitor fill levels </span>
                         <p className="mt-2"> 
-                            Locate the dashboard link or tab in the website's main menu. Click on it to open the dashboard.
+                            View real-time updates on the bin's fill level from the dashboard, helping individuals track when it's time for collection.
                         </p>
                     </li>
                     <li className="mb-6"> 
-                        <span className="font-semibold text-xl sm:text-2xl"> Familiarize with the layout </span>
+                        <span className="font-semibold text-xl sm:text-2xl"> Track waste data </span>
                         <p className="mt-2"> 
-                            Once the dashboard loads, take time to explore the layout. This includes:
+                            Check the number of items disposed of per day or month, and see the potential earnings based on the recycling efforts.
                         </p>
-                        <ol className="list-inside list-disc mt-4">
-                            <li className="mb-4"> 
-                                <strong> Navigation menu: </strong> 
-                                Found at the left side of the screen. 
-                            </li>
-                            <li className="mb-4"> 
-                                <strong> Widgets or panels: </strong> 
-                                These display important charts/data summaries.
-                            </li>
-                            <li className="mb-4"> 
-                                <strong> Settings: </strong> 
-                                Located in the navigation menu.
-                            </li>
-                        </ol>
                     </li>
                     <li className="mb-6"> 
-                        <span className="font-semibold text-xl sm:text-2xl"> Explore features </span>
+                        <span className="font-semibold text-xl sm:text-2xl"> Generate reports </span>
                         <p className="mt-2"> 
-                            You can interact with various features to analyze data, locate content, and explore more details.
+                            Access analytics to track the waste management performance over time, including recycling rates.
                         </p>
-                        <ol className="list-inside list-disc mt-4">
-                            <li className="mb-4"> 
-                                <strong> View and analyze data summaries and charts: </strong> 
-                                These provide quick insights into the data you are tracking. 
-                            </li>
-                            <li className="mb-4"> 
-                                <strong> Interact with buttons, tabs, and dropdown menus: </strong> 
-                                These allow you to delve deeper into detailed information.
-                            </li>
-                        </ol>
                     </li>
                 </ol>
             </section>
             <Separator className="my-4" />
             <section className="mt-6">
-                <HeaderTitle to="questions" className="text-xl sm:text-2xl"> Common questions regarding the data and its interpretation: </HeaderTitle>
-                <h1 className="text-xl sm:text-2xl font-semibold mt-6"> What does the total waste count represent? </h1>
-                <p className="mt-4"> It shows the cumulative count of different waste categories (such as bottles and utensils) for the selected date. </p>
-                <h1 className="text-xl sm:text-2xl font-semibold mt-6"> Why does the chart sometimes show zero or empty data? </h1>
-                <p className="mt-4"> This could occur when no data is available for that specific time or category. You may need to check the date or try refreshing the page. </p>
-                <h1 className="text-xl sm:text-2xl font-semibold mt-6"> How are the recycling trends tracked? </h1>
-                <p className="mt-4"> The trends track the volume of recyclable items disposed of on campus, which can be analyzed over specific time periods like today, this month, or year. </p>
+                <HeaderTitle to="faqs" className="text-xl sm:text-2xl"> Frequently asked questions </HeaderTitle>
+                <h1 className="text-xl sm:text-2xl font-semibold mt-6"> Q: How do I know when to empty my trash bin? </h1>
+                <p className="mt-4"> A: The BOUTEN-E system will buzz when the bin reaches a certain fill threshold, alerting you to empty it before it overflows. </p>
+                <h1 className="text-xl sm:text-2xl font-semibold mt-6"> Q: What types of materials can I dispose of in the smart bin? </h1>
+                <p className="mt-4"> A: BOUTEN-E is designed to accept bottles and utensils. The system will help you ensure proper disposal of these items. </p>
+                <h1 className="text-xl sm:text-2xl font-semibold mt-6"> Q: How do I track earnings? </h1>
+                <p className="mt-4"> A: The dashboard displays potential earnings based on the amount of recyclables processed, showing you how much your recycling efforts can contribute. </p>
             </section>
             <Separator className="my-4" />
             <section className="mt-6">
                 <HeaderTitle to="issues" className="text-xl sm:text-2xl"> Technical issues </HeaderTitle>
-                <h1 className="text-xl sm:text-2xl font-semibold mt-6"> Camera cannot detect trash </h1>
-                <p className="mt-4"> 
-                    <strong> Solution: </strong> 
-                    Ensure you are within the camera's detection range. If the trash bin hasn't been opened yet, try waiting a few seconds for the system to process the data.
-                </p>
-                <h1 className="text-xl sm:text-2xl font-semibold mt-6"> Data not displaying properly </h1>
-                <p className="mt-4"> 
-                    <strong> Solution: </strong> 
-                    Try refreshing the dashboard page. If issues persist, check your internet connection and ensure the system is operating correctly.
-                </p>
-                <h1 className="text-xl sm:text-2xl font-semibold mt-6"> Issues with the trash collector data </h1>
-                <p className="mt-4"> 
-                    <strong> Solution: </strong> 
-                    If the data is malfunctioning, try refreshing the dashboard to re-fetch updated information.
-                </p>
+                <p className="mt-4"> If you're experiencing technical issues with the BOUTEN-E website, please refer to the following steps: </p>
+                <ol className="list-inside list-decimal mt-4">
+                    <li className="mb-4"> 
+                        <strong> Check your internet connection: </strong> 
+                        Ensure your device is connected to a stable network.
+                    </li>
+                    <li className="mb-4"> 
+                        <strong> Restart the website: </strong> 
+                        Close and reopen the BOUTEN-E dashboard for troubleshooting.
+                    </li>
+                    <li className="mb-4"> 
+                        <strong> Update software: </strong> 
+                        Make sure you're using the latest version of the BOUTEN-E system by checking for any software updates.
+                    </li>
+                    <li className="mb-4"> 
+                        <strong> Contact support: </strong> 
+                        If issues persist, please reach out to our support team at _____________.
+                    </li>
+                </ol>
             </section>
         </div>
     );

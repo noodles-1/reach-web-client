@@ -48,7 +48,7 @@ export function AppSidebar() {
         <Sidebar>
             <SidebarContent>
                 <SidebarGroup>
-                    <SidebarHeader className="font-semibold my-8 sm:my-4"> ASTCAW - Waste Management </SidebarHeader>
+                    <SidebarHeader className="font-semibold my-8 sm:my-4"> BOUTEN-E - Waste Management </SidebarHeader>
                     <Separator className="mb-4"/>
                     <SidebarGroupContent>
                         <SidebarMenu>
