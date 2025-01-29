@@ -1,7 +1,5 @@
 'use client'
 
-import { useState, useEffect } from "react"
-
 import Link from "next/link"
 import { usePathname } from "next/navigation"
 import { Home, LayoutDashboard, Info, CircleHelp } from "lucide-react"
@@ -21,7 +19,7 @@ import {
 import { Separator } from "@/components/ui/separator"
 import { Button } from "@/components/ui/button"
 
-import { useQuery } from "@tanstack/react-query"
+import useFetchUser from "@/hooks/use-fetch-user"
 
 const items = [
     {
@@ -50,32 +48,10 @@ const items = [
     }
 ]
 
-const SERVER_URL = process.env.NEXT_PUBLIC_SERVER_URL;
-
 export function AppSidebar() {
     const pathname = usePathname();
     const { setOpenMobile } = useSidebar();
-    const [userData, setUserData] = useState(null);
-
-    const { data: authData, isFetching: isAuthFetching } = useQuery({
-        queryKey: ['authStatus'],
-        queryFn: () => fetch('/api/auth/status').then(res => res.json())
-    });
-
-    useEffect(() => {
-        const fetchUserData = async () => {
-            const response = await fetch(`${SERVER_URL}/user`, {
-                credentials: 'include'
-            });
-            const data = await response.json()
-            setUserData(data[0]);
-        };
-
-        if (authData && authData.authenticated)
-            fetchUserData();
-        else
-            setUserData(null);
-    }, [authData]);
+    const { authData, isAuthFetching, userData } = useFetchUser();
 
     return (
         <Sidebar>
