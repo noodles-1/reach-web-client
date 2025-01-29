@@ -12,8 +12,8 @@ import AboutDashboard from "@/components/cards/about-dashboard";
 
 const Dashboard = () => {
     const [date, setDate] = useState({
-        from: subDays(new Date(), 3),
-        to: addDays(new Date(), 3),
+        from: subDays(new Date(), 7),
+        to: new Date(),
     });
 
     return (

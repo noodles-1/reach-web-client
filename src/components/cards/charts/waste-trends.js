@@ -10,7 +10,7 @@ import {
     CardTitle,
 } from "@/components/ui/card";
 
-import { CartesianGrid, Line, LineChart, XAxis } from "recharts";
+import { CartesianGrid, Line, LineChart, XAxis, YAxis } from "recharts";
 import {
     ChartContainer,
     ChartTooltip,
@@ -31,12 +31,14 @@ const SERVER_URL = process.env.NEXT_PUBLIC_SERVER_URL;
 export function WasteTrends({ item, date }) {
     const [items, setItems] = useState(null);
     const completeDates = [];
+    let maxCount = 0;
 
     if (items && date && date.to && date.from) {
         const chartMap = new Map();
         items.forEach(item => {
             const key = `${item.month}/${item.day}/${item.year}`;
             chartMap.set(key, item.item_count);
+            maxCount += parseInt(item.item_count);
         });
 
         let currDate = new Date(date.from);
@@ -110,9 +112,14 @@ export function WasteTrends({ item, date }) {
                                 margin={{
                                     left: 12,
                                     right: 12,
+                                    top: 30
                                 }}
                             >
                                 <CartesianGrid vertical={false} />
+                                <YAxis 
+                                    hide
+                                    domain={[0, maxCount]}
+                                />
                                 <XAxis
                                     dataKey="date"
                                     tickLine={false}
