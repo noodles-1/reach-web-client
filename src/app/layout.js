@@ -17,7 +17,7 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata = {
-    title: "R.E.A.C.H Waste Management Dashboard",
+    title: "BOUTEN-E Waste Management Dashboard",
     description: "Enhancing Waste Management Practices at Arellano University - Jose Rizal Campus.",
 };
 
