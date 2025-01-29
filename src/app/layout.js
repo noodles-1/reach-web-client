@@ -6,6 +6,8 @@ import { AppSidebar } from "@/components/app-sidebar";
 
 import { Analytics } from "@vercel/analytics/next";
 
+import QueryProvider from "@/app/QueryProvider";
+
 const geistSans = Geist({
     variable: "--font-geist-sans",
     subsets: ["latin"],
@@ -17,7 +19,7 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata = {
-    title: "R.E.A.C.H Waste Management Dashboard",
+    title: "BOUTEN-E Waste Management Dashboard",
     description: "Enhancing Waste Management Practices at Arellano University - Jose Rizal Campus.",
 };
 
@@ -27,13 +29,15 @@ export default function RootLayout({ children }) {
             <body
                 className={`${geistSans.variable} ${geistMono.variable} antialiased font-[family-name:var(--font-geist-sans)] p-4 sm:p-16`}
             >
-                <SidebarProvider>
-                    <AppSidebar />
-                    <main className="w-full md:w-[70%]">
-                        <SidebarTrigger className="md:hidden py-6" />
-                        {children}
-                    </main>
-                </SidebarProvider>
+                <QueryProvider>
+                    <SidebarProvider>
+                        <AppSidebar />
+                        <main className="w-full md:w-[70%]">
+                            <SidebarTrigger className="md:hidden py-6" />
+                            {children}
+                        </main>
+                    </SidebarProvider>
+                </QueryProvider>
                 <Analytics />
             </body>
         </html>
